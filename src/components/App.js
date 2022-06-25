@@ -1,4 +1,5 @@
 import NavBar from "./NavBar";
+import GifListContainer from "./GifListContainer";
 
 function App() {
   return (

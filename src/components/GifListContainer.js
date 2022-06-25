@@ -1,18 +1,25 @@
-
+import { useState } from 'react'
+import GifList from './GifList'
+import GifSearch from './GifSearch'
 
 export default function GifListContainer() {
+  const [threeGifs, setThreeGifs] = useState([])
+
   // fetching the data from the Giphy API
 
 
   // storing the first 3 gifs from the response in its component state
 
-
-  // passing that data down to its child, the GifList component, as a prop
-
+  const handleSubmit = e => {
+    debugger
+    e.preventDefault()
+    console.log('Hi from handleSubmit')
+  }
 
   return (
     <>
-      <h1>Hi from GifListContainer</h1>
+      <GifSearch onSubmit={handleSubmit} />
+      <GifList threeGifs={threeGifs} />
     </>
   )
 }
