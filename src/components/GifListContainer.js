@@ -4,21 +4,32 @@ import GifSearch from './GifSearch'
 
 export default function GifListContainer() {
   const [threeGifs, setThreeGifs] = useState([])
+  const [searchStr, setSearchStr] = useState('')
 
-  // fetching the data from the Giphy API
+  const API_KEY = process.env.REACT_APP_GIPHY_API_KEY
 
-
-  // storing the first 3 gifs from the response in its component state
+  const storeGifs = (gifs) => {
+    const filteredGifs = gifs.data.slice(0, 3).map(gif => gif.images.original.url)
+    setThreeGifs([...filteredGifs])
+  }
 
   const handleSubmit = e => {
-    debugger
     e.preventDefault()
-    console.log('Hi from handleSubmit')
+    fetch(`https://api.giphy.com/v1/gifs/search?q=${searchStr}&api_key=${API_KEY}&rating=g`)
+      .then(r => r.json())
+      .then(gifs => {
+        storeGifs(gifs)
+        setSearchStr('')
+      })
   }
 
   return (
     <>
-      <GifSearch onSubmit={handleSubmit} />
+      <GifSearch
+        searchStr={searchStr}
+        setSearchStr={setSearchStr}
+        handleSubmit={handleSubmit}
+      />
       <GifList threeGifs={threeGifs} />
     </>
   )

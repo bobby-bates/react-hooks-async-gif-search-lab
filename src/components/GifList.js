@@ -1,18 +1,14 @@
 
 
 export default function GifList({ threeGifs }) {
-  console.log(threeGifs)
-  // debugger
-
-  const renderGifs = () => threeGifs.map(gif => {
-    return <li>{gif}</li>
-  })
+  const renderGifs = threeGifs.map(url => (
+    <li key={url} style={{'listStyleType': 'none'}}><img src={url} /></li>
+    ))
 
   return (
     <>
-      <h1>Hi from GifList</h1>
       <ul>
-
+        {renderGifs}
       </ul>
     </>
   )

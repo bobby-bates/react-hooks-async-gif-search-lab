@@ -1,19 +1,16 @@
 import { useState } from 'react'
 
-export default function GifSearch({ handleSubmit }) {
-  const [searchStr, setSearchStr] = useState('')
-  console.log(searchStr)
+export default function GifSearch({ searchStr, setSearchStr, handleSubmit }) {
   const handleChange = e => setSearchStr(e.target.value)
 
   return (
     <>
-      <form >
+      <form onSubmit={handleSubmit}>
         <label>Enter a search term:
-          <input type='text' onChange={handleChange}/>
+          <input type='text' value={searchStr} onChange={handleChange}/>
         </label>
-        <input type='submit' value='Find GIFs' onSubmit={handleSubmit}/>
+        <button type='submit'>Find GIFs</button>
       </form>
-      <h1>Hi from GifSearch</h1>
     </>
   )
 }
